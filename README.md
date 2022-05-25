@@ -1,6 +1,6 @@
-#Faust agent communication
+# Faust agent communication
 
-For check connection of separated faust applications:
+For check communication of separated faust applications:
 1) Start faust apps and kafka<br>
 `sudo docker-compose up -d`
 2) Wait while app starting (use `sudo docker-compose logs producer_service` for check)
@@ -10,5 +10,6 @@ For check connection of separated faust applications:
 - `sudo docker-compose logs producer_service`
 - `sudo docker-compose logs consumer_service`
 
-Get topics:
+Some hints:
 - `sudo docker exec -it kafka ./opt/bitnami/kafka/bin/kafka-topics.sh --list --zookeeper zookeeper:2181`
+- `sudo docker exec -it kafka ./opt/bitnami/kafka/bin/kafka-console-consumer.sh --bootstrap-server kafka:9092 --topic <name> --from-beginning`

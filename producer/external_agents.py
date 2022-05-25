@@ -6,10 +6,10 @@ app = faust.App(
     broker='kafka://kafka:9092',
 )
 
-input_topic = app.topic('input')
+input_topic = app.topic('consumer_input')
 
 
 @app.agent(input_topic)
-async def consumer_agent(messages):
+async def external_consumer_agent(messages):
     """External agent"""
     pass
