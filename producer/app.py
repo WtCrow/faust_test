@@ -1,4 +1,5 @@
 from external_agents import external_consumer_agent
+from faust.types import ProcessingGuarantee
 import logging
 import faust
 
@@ -7,6 +8,7 @@ app = faust.App(
     'PoC_producer',
     broker=f'kafka://kafka:9092',
     value_serializer='raw',
+    processing_guarantee=ProcessingGuarantee.EXACTLY_ONCE
 )
 
 input_topic = app.topic('producer_input')

@@ -11,5 +11,10 @@ For check communication of separated faust applications:
 - `sudo docker-compose logs consumer_service`
 
 Some hints:
-- `sudo docker exec -it kafka ./opt/bitnami/kafka/bin/kafka-topics.sh --list --zookeeper zookeeper:2181`
-- `sudo docker exec -it kafka ./opt/bitnami/kafka/bin/kafka-console-consumer.sh --bootstrap-server kafka:9092 --topic <name> --from-beginning`
+- List topics: `sudo docker exec -it kafka ./opt/bitnami/kafka/bin/kafka-topics.sh --list --zookeeper zookeeper:2181`
+- Read data from topic: `sudo docker exec -it kafka ./opt/bitnami/kafka/bin/kafka-console-consumer.sh --bootstrap-server kafka:9092 --topic <name> --from-beginning`
+- Read data from __transaction_state topic (binary data):
+  - `sudo docker exec -it kafka bash`
+  - `cd /opt/bitnami/kafka/bin/`
+  - `echo "exclude.internal.topics=false" > consumer.config`
+  - `./kafka-console-consumer.sh --consumer.config consumer.config --formatter "kafka.coordinator.transaction.TransactionLog\$TransactionLogMessageFormatter" --bootstrap-server localhost:9092 --topic __transaction_state --from-beginning`
