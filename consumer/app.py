@@ -1,7 +1,7 @@
+from faustprometheus.monitor import PrometheusMonitor
 from faust.types import ProcessingGuarantee
 import logging
 import faust
-
 
 app = faust.App(
     'PoC_consumer',
@@ -9,6 +9,7 @@ app = faust.App(
     value_serializer='raw',
     processing_guarantee=ProcessingGuarantee.EXACTLY_ONCE
 )
+app.monitor = PrometheusMonitor(app)
 
 input_topic = app.topic('consumer_input')
 

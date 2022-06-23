@@ -1,3 +1,4 @@
+from faustprometheus.monitor import PrometheusMonitor
 from external_agents import external_consumer_agent
 from faust.types import ProcessingGuarantee
 import logging
@@ -10,6 +11,7 @@ app = faust.App(
     value_serializer='raw',
     processing_guarantee=ProcessingGuarantee.EXACTLY_ONCE
 )
+app.monitor = PrometheusMonitor(app)
 
 input_topic = app.topic('producer_input')
 output_topic = app.topic('consumer_output')

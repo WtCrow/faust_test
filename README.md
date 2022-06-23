@@ -18,3 +18,4 @@ Some hints:
   - `cd /opt/bitnami/kafka/bin/`
   - `echo "exclude.internal.topics=false" > consumer.config`
   - `./kafka-console-consumer.sh --consumer.config consumer.config --formatter "kafka.coordinator.transaction.TransactionLog\$TransactionLogMessageFormatter" --bootstrap-server localhost:9092 --topic __transaction_state --from-beginning`
+- Get prometheus metrics: `curl http://127.0.0.1:6666/metrics > consumer_metrics.txt && curl http://127.0.0.1:6667/metrics > producer_metrics.txt`
